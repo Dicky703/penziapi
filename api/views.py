@@ -137,7 +137,7 @@ class PenziMessageView(APIView):
             self.logger.exception("User does not exist.")
         except Exception as e:
             self.logger.exception("Error while processing details message.")
-            return "An error occurred while processing your request."
+            return "An error occurred while processing your request please enter details in this format E.g. details#diploma#driver#single#christian#mijikenda"
 
     def process_myself_message(self, message_content):
         # Process MYSELF message
