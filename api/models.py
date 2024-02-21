@@ -32,10 +32,47 @@ class Users(models.Model):
     religion = models.CharField(max_length=50, blank=True, null=True)
     ethnicity = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField()
-    myself = models.TextField()
+    #myself = models.TextField()
     registration_time = models.DateTimeField(auto_now_add=True)
 
     
 
     def __str__(self):
         return self.name
+
+class NextIndex(models.Model):
+    msisdn = models.CharField(max_length=15, primary_key=True)
+    last_processed_index = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"NextIndex for MSISDN {self.msisdn}"
+
+class UserMatch(models.Model):
+    msisdn = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    age = models.IntegerField()
+    town = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.name}, aged: {self.age}, town: {self.town}"
+
+class MatchingProcess(models.Model):
+    msisdn = models.CharField(max_length = 15, primary_key = True)
+    key_word = models.IntegerField()
+    last_queried_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'match_process'
+
+class UpdateNext(models.Model):
+    msisdn = models.CharField(max_length=20, primary_key = True)
+    lower_age = models.IntegerField()
+    upper_age = models.IntegerField()
+    town = models.CharField(max_length=100)
+    last_queried_id = models.IntegerField(default=0)
+
+    class meta:
+        db_table = 'api_updatenext'
+
+

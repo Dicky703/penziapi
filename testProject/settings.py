@@ -86,9 +86,10 @@ DATABASES = {
         #'PASSWORD': 'dixon2000',  
         #'HOST': 'localhost',  
         #'PORT': '3306',  
-        'NAME': 'penzi',  
-        'USER': 'mpenzi',  
-        'PASSWORD': 'mpenzi2000',  
+        #'NAME': 'wapenzi', 
+        'NAME' : 'test', 
+        'USER': 'dixon',  
+        'PASSWORD': 'dixon2000',  
         'HOST': 'localhost',  
         'PORT': '3306',  
         'OPTIONS': {  
