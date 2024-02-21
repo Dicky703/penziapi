@@ -1,0 +1,29 @@
+name: Backup MySQL Database
+
+on:
+  schedule:
+    - cron: '0 11 * * *' # Runs at 2:00 AM every day
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install MySQL
+      run: sudo apt-get install mysql-client
+
+    - name: Dump MySQL database
+      run: |
+        mysqldump -h shell -u root -p$PASSWORD test > penzibackup.sql
+      env:
+        PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "dikilemayian@gmail.com"
+        git config --global user.name "Dicky703"
+        git add -A
+        git diff --staged --exit-code || git commit -m "Update database backup"
+        git push
